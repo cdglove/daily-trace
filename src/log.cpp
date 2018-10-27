@@ -1,5 +1,5 @@
 // ****************************************************************************
-// log.cpp
+// daily/trace/log.cpp
 //
 // Basic logging facility for daily.
 //
@@ -9,21 +9,18 @@
 //
 // ****************************************************************************
 
-// ----------------------------------------------------------------------------
-//
+#include "daily/trace/log.hpp"
+
+namespace daily { namespace trace {
 unsigned int g_log_level = 0;
-bool		 g_use_buffered_log = true;
+bool g_use_buffered_log  = true;
 
-// ----------------------------------------------------------------------------
-//
-void SetLogVerbosity(unsigned int v)
-{
-	g_log_level = v;
+void set_verbosity(unsigned int v) {
+  g_log_level = v;
 }
 
-// ----------------------------------------------------------------------------
-//
-void SetLogUseBufferedOutput(bool buffer)
-{
-	g_use_buffered_log = buffer;
+void use_buffered_output(bool buffer) {
+  g_use_buffered_log = buffer;
 }
+
+}} // namespace daily::trace

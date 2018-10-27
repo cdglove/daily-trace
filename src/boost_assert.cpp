@@ -9,8 +9,8 @@
 //
 // ****************************************************************************
 
-#include "daily/trace/debugbreak.h"
-#include "daily/trace/log.h"
+#include "daily/trace/debugbreak.hpp"
+#include "daily/trace/log.hpp"
 
 // ----------------------------------------------------------------------------
 // Required when linking against a boost with boost assert enabled.

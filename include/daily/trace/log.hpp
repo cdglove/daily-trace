@@ -70,16 +70,16 @@ class logger {
 };
 
 void set_verbosity(unsigned int v);
-void use_buffered_output(bool buffer);
+void use_sink(std::ostream& out);
 
 // ----------------------------------------------------------------------------
 //
 inline logger LOG(unsigned int verbosity = 0) {
   extern unsigned int g_log_level;
-  extern bool g_use_buffered_log;
+  extern std::ostream* g_log_sink;
 
   if(g_log_level >= verbosity) {
-    return g_use_buffered_log ? logger(std::clog) : logger(std::cerr);
+    return logger(*g_log_sink);
   }
   else {
     static boost::onullstream cnull;
@@ -89,7 +89,7 @@ inline logger LOG(unsigned int verbosity = 0) {
 
 }} // namespace daily::trace
 
-#if !DAILY_NO_GLOBAL_LOG
+#if !DAILY_NO_GLOBAL_LOG_FUNCTION
 using daily::trace::LOG;
 #endif
 

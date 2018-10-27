@@ -14,30 +14,25 @@
 
 // ----------------------------------------------------------------------------
 // Required when linking against a boost with boost assert enabled.
-namespace boost
-{
-	void assertion_failed(char const * expr, char const * function, char const * file, long line)
-	{
-		LOG()
-			<< "***** Internal Program Error - assertion (" << expr << ") failed in "
-			<< function << ":\n"
-			<< file << '(' << line << ")" << std::endl
-		;
+namespace boost {
+void assertion_failed(
+    char const* expr, char const* function, char const* file, long line) {
+  LOG() << "***** Internal Program Error - assertion (" << expr
+        << ") failed in " << function << ":\n"
+        << file << '(' << line << ")" << std::endl;
+  DEBUG_BREAK();
+}
 
-		DEBUG_BREAK();
-      
-	}
-
-	void assertion_failed_msg(char const * expr, char const * msg, char const * function, char const * file, long line)
-	{
-		LOG()
-			<< "***** Internal Program Error - assertion (" << expr << ") failed in "
-			<< function << ":\n"
-			<< file << '(' << line << "): " << msg << std::endl
-		;
-
-		DEBUG_BREAK();
-      
-	}
+void assertion_failed_msg(
+    char const* expr,
+    char const* msg,
+    char const* function,
+    char const* file,
+    long line) {
+  LOG() << "***** Internal Program Error - assertion (" << expr
+        << ") failed in " << function << ":\n"
+        << file << '(' << line << "): " << msg << std::endl;
+  DEBUG_BREAK();
+}
 
 } // namespace boost

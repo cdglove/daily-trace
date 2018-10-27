@@ -12,14 +12,16 @@
 #define DAILY_TRACE_DEBUGBREAK_HPP
 #pragma once
 
-#if _MSC_VER
-#  define DEBUG_BREAK() __debugbreak()
-#elif defined(SIGTRAP)
+#if _WIN32
+#  if _MSC_VER
+#    define DEBUG_BREAK() __debugbreak()
+#  else
+extern "C" void DebugBreak();
+#    define DEBUG_BREAK() DebugBreak()
+#  endif
+#elif defined(__unix__)
 #  include <signal.h>
 #  define DEBUG_BREAK() raise(SIGTRAP)
-#elif WIN32
-#  include <windows.h>
-#  define DEBUG_BREAK() DebugBreak()
 #else
 #  include <cassert>
 #  define DEBUG_BREAK() assert(false)

@@ -12,15 +12,16 @@
 #include "daily/trace/log.hpp"
 
 namespace daily { namespace trace {
+
 unsigned int g_log_level = 0;
-bool g_use_buffered_log  = true;
+std::ostream* g_log_sink = &std::clog;
 
 void set_verbosity(unsigned int v) {
   g_log_level = v;
 }
 
-void use_buffered_output(bool buffer) {
-  g_use_buffered_log = buffer;
+void use_sink(std::ostream& out) {
+  g_log_sink = &out;
 }
 
 }} // namespace daily::trace
